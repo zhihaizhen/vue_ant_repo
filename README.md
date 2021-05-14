@@ -1,219 +1,177 @@
-## 项目简介
+<p align="center">
+  <a href="http://gist006.gitee.io/vue-antd-admin/">
+    <img src="https://images.gitee.com/uploads/images/2020/1129/181145_3aeaf5c3_7647779.png" alt="Logo" width="250">
+   <h1 align="center"> vue antd admin</h3>
+  </a>
+</p>
 
-本项目使用vue-cli工具构建，支持热更新热重载，使用开源项目d2admin作为管理后台开发模板，核心组件库为element ui。
+  <p align="center">
+    <a href="https://github.com/biubiubiu01/vue-antd-admin"><strong>探索本项目的文档 »</strong></a>
+    <br />
+    <br />
+    <a href="http://gist006.gitee.io/vue-antd-admin/">在线预览</a>
+    ·
+    <a href="https://github.com/biubiubiu01/vue-antd-admin/issues">提出Bug</a>
+    ·
+    <a href="https://github.com/biubiubiu01/vue-antd-admin/issues">提出建议</a>
+  </p>
 
-## 与上次版本最大的不同
+## 简介
 
-- 取消版本库中的配置文件，增加配置文件模板(`.gitonly文件`)，初始化项目配置文件使用 `npm run init` 命令，生成的配置文件只存在本地，不会提交到版本库中。
+[vue-antd-admin](http://gist006.gitee.io/vue-antd-admin/)是一个后台管理系统，基于[vue](https://github.com/vuejs/vue)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)开发，包含动态路由+权限管理解决用户权限问题，提供基础固定权限：admin、test、editor和自定义用户权限，可自定义修改角色对应的菜单；布局方面提供左右布局和上下布局两种，可自由切换；系统内置了3套主题，可随意切换；还有一些后台管理系统常用的功能如表单，table表等；
 
-## 快速开发向导
+## 测试账号
+```
+过一段时间后才发现忘记放测试账号和密码了，哈哈哈
 
-- 1、绑定host `127.0.0.1 ww.testdev.fun`、`127.0.0.1 xtadmin.testdev.fun``
-- 2、配置nginx（详见文档）
-- 3、拉取代码到本地
-- 4、安装项目依赖  `npm install`
-- 5、初始化配置文件  `npm run init`
-- 6、启动开发模式  `npm run dev`
-- 7、浏览器访问  http://wwa.fibtc.com/
-- 8、生产环境文件打包`npm run build`
-- 9、提交代码 `git push`
-
-## 初始化配置文件
-
-以下配置文件`不存在`版本库中，请手动复制模板文件或使用脚本初始化后使用。
+1.  用户名：admin  密码 任意6位数 （如果你喜欢，可以用123456） 拥有admin的权限可以查看所有页面
+2.  用户名：test   密码 任意6位数 （如果你喜欢，可以用123456） 拥有test的页面权限，可以查看部分页面
+3.  用户名：editor 密码 任意6位数 （如果你喜欢，可以用123456） 拥有editor的页面权限，可以查看富文本等页面
+4.  使用手机号验证码登录 ，默认拥有admin的权限
 
 ```
-'./vue.config.js',
-'./src/config/env/test.js',
-'./src/config/env/production.js',
-'./src/config/env/development.js',
-```
 
-配置文件模板以`.gitonly`后缀标识，表示这个文件只在版本库内存在（不要删除），自己的配置文件在本地即可，不用提交到版本库，项目有脚本可以快速初始化配置文件：
+已实现基础版node+express+mysql后台，地址：[vue-antd-server](https://github.com/biubiubiu01/vue-antd-server)
 
-```
-// 初始化配置文件
-npm run init
-```
-
-## 配置文件修改（开发环境：development.js）
-```
-注意：此配置是依据现在测试环境配置而配置
-ENV: 'w',
-DOMAIN_WWW: 'http://admin.btbt.com',
-```
+react版本，地址：[reacct-antd-admin](https://github.com/biubiubiu01/react-antd-admin)
 
 
-## 环境配置
+## 前序准备
+* 该项目采用[vue](https://github.com/vuejs/vue)+[vue-cli4](https://github.com/vuejs/vue-cli)+[vuex](https://github.com/vuejs/vuex)+[ant-design-vue](https://github.com/vueComponent/ant-design-vue)和[axios](https://github.com/axios/axios)开发，数据采用[mock.js](https://github.com/nuysoft/Mock)进行模拟,后期打算使用node写后台；
+* [webpack](https://github.com/webpack/webpack)大幅度优化了下，首屏加载速度更快；
+* 系统内置了echarts常用的图表展示和arcgis地图；
+* 使用了[jest](https://github.com/facebook/jest)单元测试，目前覆盖率还比较低，有时间再写；
+* 格式化方面采用 [ESlint](https://github.com/eslint/eslint)+[prettier](https://github.com/prettier/prettier)。
 
-1.hosts配置
+![home](https://images.gitee.com/uploads/images/2020/1129/194928_63e651ea_7647779.png)
+
+## 功能
 
 ```
-127.0.0.1       ww.btbt.com
-127.0.0.1       admin.btbt.com
-127.0.0.1(根据具体服务器ip配置) socket.btbt.com
+- 登录  用户名密码/手机号验证码
+- 权限  
+- 动态路由
+- echarts各种图表
+- arcgis地图
+- 克里金插值分析图
+- 全景图
+- 富文本
+- Markdown
+- 错误页面 403 404 500
+- 个人设置
+- 系统设置
+- 更换主题
+- 两种布局方式
+- 面包屑
+- 标签页
+- webSocket 
+- svg图标
+- 全屏
+- 返回顶部
+- webpack优化
+- 抽奖页
+- table表
+- form表单
+- 上传Excel
+- 上传头像和裁剪
+- htmlcanvas2截屏
+- 封装自定义loading
 ```
 
-2.nginx配置
-
-注意：请修改对应的root目录路径，若无法访问请检查nginx配置文件的权限是否设置。
+## webpack优化
+```
+- 关闭生产环境sourceMap;
+- 关闭预加载(vue会预加载后面的页面，会导致首屏加载比较慢)
+- g-zip压缩(需要nginx配置);
+- 生产环境CDN加载部分插件
+- 去除生产环境console和debugger;
+- 公共代码抽离
+- 打包大小分析
+- 打包缓存
+- 部分依赖使用异步cdn加载
 
 ```
-server {
-    listen 80;
-    server_name ww.btbt.com;
-    location / {
-        proxy_pass_header Server;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://127.0.0.1:4004/;
-    }
-    location /src {
-        root /Users/guanxiao/Desktop/code/ex-front-xt-last/public;
-    }
-    location /lib {
-        root /Users/guanxiao/Desktop/code/ex-front-xt-last/public;
-    }
-    location /dist {
-        root /Users/guanxiao/Desktop/code/ex-front-xt-last/public;
-    }
-    location /exchange-main/ {
-        proxy_pass_header Server;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://192.168.3.201:8075/;
-        #proxy_pass https://www.fibtc.com/exchange-main/;
-    }
-    location /exchange-user/ {
-        proxy_pass_header Server;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://192.168.3.201:8084/;
-        #proxy_pass https://www.fibtc.com/exchange-user/;
-    }
-    location /exchange-trade/ {
-        proxy_pass_header Server;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://192.168.3.201:8082/;
-        #proxy_pass https://www.fibtc.com/exchange-trade/;
-    }
-    location /exchange-otc/ {
-        proxy_pass_header Server;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://192.168.3.201:8083/;
-        #proxy_pass https://www.fibtc.com/exchange-otc/;
-    }
 
-    location = /50x.html {
-        root html;
-    }
-    error_page 500 502 503 504  /50x.html;
-}
+## 使用说明
+```
+- 拥有 admin、test和editor三种权限，每个权限对应的路由和左侧菜单不同；
+- 点击个人设置个性化或者右边设置，可以更改页面的设置，如果标签页是否开启，布局方式,主题颜色等；
+- 系统管理员拥有所有权限，可以更改用户对应的菜单路由和角色对应的权限。
+......
+```
 
 
-server {
-    server_name admin.btbt.com;
-    client_max_body_size 100m;
-    client_body_buffer_size 100m;
-    listen 80; # managed by Certbot
+### 文件目录说明
+```
 
-    location /admin/trade/ {
-        proxy_pass_header Server;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://192.168.3.201:8076;
-    }
-    location /admin/wallet/ {
-        proxy_pass_header Server;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://192.168.3.201:8077;
-    }
-    location /admin/fiat/ {
-        proxy_pass_header Server;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://192.168.3.201:8083;
-    }
-    location /admin/message/ {
-        proxy_pass_header Server;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://192.168.3.201:8086;
-    }
-    location /admin/lever/ {
-        proxy_pass_header Server;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://192.168.3.201:8087;
-    }
-    location /admin/user/ {
-        proxy_pass_header Server;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://192.168.3.201:8084;
-    }
-    location /admin/config/ {
-        proxy_pass_header Server;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://192.168.3.201:8085;
-    }
-    location /admin/activity/ {
-        proxy_pass_header Server;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://192.168.3.205:8073;
-    }
-    location /admin {
-        proxy_set_header   Host             $host;
-        proxy_set_header   X-Real-IP        $remote_addr;
-        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-        proxy_pass http://192.168.3.201:8081;
-    }
-   location / {
-             proxy_pass_header Server;
-             proxy_set_header Host $http_host;
-             proxy_set_header X-Real-IP $remote_addr;
-             proxy_pass http://127.0.0.1:3094/;
-        }
-}
-
-server {
-    listen 80;
-    server_name f.xt.com;
-    location / {
-        proxy_pass_header Server;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_pass http://127.0.0.1:8081/;
-    }
-    location = /50x.html {
-        root html;
-    }
-    error_page 500 502 503 504  /50x.html;
-}
+├── mock                             ---mock模拟数据
+├── public                           ---静态资源文件
+├── src          
+│  ├── api                           ---接口     
+│  ├── assets                        ---图片
+│  ├── components                    ---可复用的vue组件
+│  ├── layouts                       ---布局方式
+│  ├── router                        ---路由
+│  ├── store                         ---vuex
+│  ├── styles                        ---sass样式
+│  ├── utils                         ---方法函数
+│  ├── vendor                        ---导出excel
+│  ├── views                         ---页面
+│  ├── App.vue                       
+│  ├── main.js            
+│  ├── permission.js                 ---路由拦截           
+├── tests                            ---单元测试文件
+├── .browserslistrc
+├── .env
+├── .eslintrc.js
+├──  babel.config.js
+├── .jest.config.js                  ---jest的配置
+├──  package.json
+├──  package-lock.json
+├──  README.md
+└──  vue.config.js                   ---webpack的配置
 
 
 ```
 
-## 开发命令
 
-### npm run dev
+ 
+## 安装
 
-注意：在执行npm run dev前，请项目目录下创建一个空的dist文件，否则会报错
+```
+# 克隆项目
+git clone https://github.com/biubiubiu01/vue-antd-admin.git
+# 进入项目目录
+cd vue-antd-admin
+# 安装依赖
+npm install
+# 本地开发 启动项目
+npm run serve
+```
 
-开发环境对应配置文件为`./src/config/env/development.js`。
 
-### npm run build
+### 部署
 
-该命令打包生产环境的包，对应配置文件为`./src/config/env/production.js`。
+```
+# 打包项目
+npm run build
+# 单元测试
+npm run test:unit
+```
 
-### 打包发布
+## Online Demo
 
-`./dist`目录不要提交到版本库，打包完毕会自动压缩该目录，生成`./dist.zip`压缩文件，将该文件提交到版本库即可。
+[在线 Demo](http://gist006.gitee.io/vue-antd-admin/)
+
+## 最后
+
+这个项目参考了 [vue-element-admin](https://panjiachen.gitee.io/vue-element-admin/#/) 和 [ant-design-pro](https://preview.pro.antdv.com/dashboard/workplace),发现了好多好用的写法和方法，建议如果真想提升自己的代码水平，可以多看看大佬们的代码。
+开源不易，若觉得这个项目对你有用，可以点个[star](https://github.com/biubiubiu01/vue-antd-admin)，欢迎提出建议和bug :smile: 。
+
+
+
+
+
 
 
 

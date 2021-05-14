@@ -1,0 +1,422 @@
+
+
+/* 自定义按钮 */
+.myButton {
+    display: flex;
+    height: 76%;
+    width: 100%;
+    font-size: 12px;
+    justify-content: center;
+    align-items: center;
+    background-color: #131313;
+    color: #b0bec5;
+    border-radius: 2px;
+
+}
+
+.myButton:hover {
+    background-color: #b18c2d;
+    color: white;
+}
+
+.myButton.active {
+    background-color: #b18c2d;
+    color: white;
+}
+
+/* 顶部工具条 */
+.group-wWM3zP_M- {
+    background-color: transparent;
+}
+
+#header-toolbar-indicators span svg {
+    color: #b0bec5;
+    /* width: 20px;
+    height: 20px; */
+}
+
+#header-toolbar-indicators.isOpened-p-Ume5l9- span svg {
+    color: white;
+    /* width: 20px;
+    height: 20px; */
+}
+
+#header-toolbar-indicators>div {
+    color: #b0bec5;
+    font-size: 12px;
+}
+
+#header-toolbar-indicators.isOpened-p-Ume5l9->div {
+    color: white;
+    font-size: 12px;
+}
+
+#header-toolbar-indicators:hover span svg {
+    color: white;
+}
+
+#header-toolbar-indicators:hover>div {
+    color: white;
+}
+
+#header-toolbar-properties svg {
+    color: #b0bec5;
+    width: 22px;
+    height: 22px;
+
+}
+
+#header-toolbar-properties.isOpened-p-Ume5l9- svg {
+    color: white;
+
+}
+
+#header-toolbar-fullscreen svg {
+    color: #b0bec5;
+    width: 22px;
+    height: 22px;
+
+}
+
+#header-toolbar-fullscreen.isOpened-p-Ume5l9- svg {
+    color: white;
+
+}
+
+#header-toolbar-properties:hover svg {
+    color: white;
+}
+
+#header-toolbar-fullscreen:hover svg {
+    color: white;
+}
+
+.button-2ioYhFEY-.isInteractive-20uLObIc-:hover:before {
+    background-color: #b18c2d;
+}
+
+.button-2ioYhFEY-.isInteractive-20uLObIc-:before {
+    height: 75%;
+    width: 100%;
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%);
+}
+
+.button-2ioYhFEY-.isInteractive-20uLObIc-.isOpened-p-Ume5l9-:before {
+    background-color: #b18c2d;
+}
+
+.button-2ioYhFEY-.isInteractive-20uLObIc-.isOpened-p-Ume5l9-:hover:before {
+    background-color: #b18c2d;
+}
+
+
+
+._tv-dialog .button,
+._tv-dialog .custom-select .switcher,
+._tv-dialog .favored-list-container span,
+._tv-dialog .submenu,
+.bottom-widgetbar-content.backtesting .button,
+.bottom-widgetbar-content.backtesting .custom-select .switcher,
+.bottom-widgetbar-content.backtesting .favored-list-container span,
+.bottom-widgetbar-content.backtesting .submenu,
+.header-chart-panel .button,
+.header-chart-panel .custom-select .switcher,
+.header-chart-panel .favored-list-container span,
+.header-chart-panel .submenu,
+.properties-toolbar .button,
+.properties-toolbar .custom-select .switcher,
+.properties-toolbar .favored-list-container span,
+.properties-toolbar .submenu {
+    cursor: pointer;
+}
+
+
+.feature-no-touch ._tv-dialog .button:not(.disabled):not(.selected):hover:before,
+.feature-no-touch ._tv-dialog .custom-select .switcher:not(.disabled):not(.selected):hover:before,
+.feature-no-touch ._tv-dialog .favored-list-container span:not(.disabled):not(.selected):hover:before,
+.feature-no-touch ._tv-dialog .submenu:not(.disabled):not(.selected):hover:before,
+.feature-no-touch .bottom-widgetbar-content.backtesting .button:not(.disabled):not(.selected):hover:before,
+.feature-no-touch .bottom-widgetbar-content.backtesting .custom-select .switcher:not(.disabled):not(.selected):hover:before,
+.feature-no-touch .bottom-widgetbar-content.backtesting .favored-list-container span:not(.disabled):not(.selected):hover:before,
+.feature-no-touch .bottom-widgetbar-content.backtesting .submenu:not(.disabled):not(.selected):hover:before,
+.feature-no-touch .header-chart-panel .button:not(.disabled):not(.selected):hover:before,
+.feature-no-touch .header-chart-panel .custom-select .switcher:not(.disabled):not(.selected):hover:before,
+.feature-no-touch .header-chart-panel .favored-list-container span:not(.disabled):not(.selected):hover:before,
+.feature-no-touch .header-chart-panel .submenu:not(.disabled):not(.selected):hover:before,
+.feature-no-touch .properties-toolbar .button:not(.disabled):not(.selected):hover:before,
+.feature-no-touch .properties-toolbar .custom-select .switcher:not(.disabled):not(.selected):hover:before,
+.feature-no-touch .properties-toolbar .favored-list-container span:not(.disabled):not(.selected):hover:before,
+.feature-no-touch .properties-toolbar .submenu:not(.disabled):not(.selected):hover:before {
+    display: none !important;
+}
+
+._tv-dialog-content label {
+    color: inherit;
+}
+
+._tv-dialog {
+    position: absolute;
+    width: 600px !important;
+    max-height: 230px;
+    left: 50%;
+    top: 50%;
+    background: #0c1932;
+    color: #b0bec5;
+    border: 1px solid #58637a;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.45);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.45);
+}
+
+._tv-dialog-content .alert-dialog-content,
+._tv-dialog-content .main-properties {
+    padding: 10px;
+    min-height: 140px;
+    max-height: 140px;
+    overflow: auto;
+    overflow-x: hidden !important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+._tv-dialog-content .main-properties.main-properties-aftertabs {
+    min-height: auto;
+}
+
+._tv-dialog-title ._tv-dialog-title-close,
+._tv-dialog-title ._tv-dialog-title-minimize {
+    width: 22px;
+    height: 22px;
+    right: 5px;
+    top: 9px;
+}
+
+._tv-dialog-content .alert-dialog-content.alert-aftertabs,
+._tv-dialog-content .alert-dialog-content.main-properties-aftertabs,
+._tv-dialog-content .main-properties.alert-aftertabs,
+._tv-dialog-content .main-properties.main-properties-aftertabs {
+    padding: 5px 10px;
+    background: rgba(14, 27, 53, 0.5);
+}
+
+._tv-dialog-content .dialog-buttons {
+    margin: 0 5px;
+}
+
+._tv-dialog .tvcolorpicker-widget {
+    border: none;
+    background: transparent;
+    -webkit-box-shadow: 0 0 0 1px #0c1932, inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    -moz-box-shadow: 0 0 0 1px #0c1932, inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 0 1px #0c1932, inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+._tv-dialog-content .main-properties td {
+    white-space: nowrap;
+}
+
+._tv-dialog-content textarea {
+    background: rgba(12, 25, 50, 0.33);
+    border: 1px solid #58637a;
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 5px 8px;
+}
+
+
+.onchart-tv-logo .text .logo-highlighted {
+    text-decoration: none;
+}
+
+.chart-page .js-rootresizer__contents .layout__area--top .header-chart-panel-sizer .left {
+    width: 100% !important;
+}
+
+.chart-page .js-rootresizer__contents .layout__area--top .header-chart-panel-sizer .left .header-group-fullscreen {
+    float: right !important;
+}
+
+.chart-page .js-rootresizer__contents .layout__area--top .header-chart-panel-sizer .left .space-single .mydate {
+    padding: 0px 12px !important;
+}
+
+.chart-page .js-rootresizer__contents .layout__area--top .header-chart-panel-sizer .left .space-single .button {
+    border: 1px solid transparent !important;
+    background-color: #131313 !important;
+
+}
+
+.chart-page .js-rootresizer__contents .layout__area--top .header-chart-panel-sizer .left .space-single .button:hover {
+    border: 1px solid white !important;
+    color: white !important;
+
+}
+
+.chart-page .js-rootresizer__contents .layout__area--top .header-chart-panel-sizer .left .space-single .button.active {
+    background-color: #b18c2d !important;
+    color: white !important;
+
+}
+
+.chart-page .chart-widget {
+    background-color: #131313 !important;
+}
+
+.chart-page .intervals-list {
+    background-color: #110e02;
+}
+
+.chart-page .intervals-list span.disabled {
+    display: none;
+}
+
+.chart-page .chart-markup-table .pane .pane-legend .study .pane-legend-item-value-wrap:nth-child(2) {
+    display: none;
+}
+
+.chart-page .pane-legend-icon-container {
+    display: none;
+}
+
+/* 右边正在加载样式 */
+.chart-page .js-market-status {
+    color: #b18c2d;
+}
+
+.chart-page .tv-market-status--loading--for-chart .tv-market-status__dot {
+    background-color: #b18c2d;
+}
+
+/* 弹窗追加样式 */
+.tv-dialog {
+    background-color: #0c1932;
+}
+.tv-dialog .js-title-text {
+    color: white;
+}.tv-dialog .tv-insert-study-item__title {
+    color: white;
+}
+.tv-insert-study-item:not(.tv-insert-study-item--subgroup-header):hover {
+    background-color: #b18c2d;
+
+}
+.tv-dialog__close svg {
+    fill: white;
+}
+.property-page {
+    color: white;
+}
+.tv-ticker__btn>svg {
+    color: #999;
+}
+
+._tv-dialog-content .main-properties:nth-child(3) > div  {
+    width: 100% !important;
+    min-width: 0 !important;
+}
+.properties-tabs a.properties-tabs-label {
+    color: white;
+}
+
+/* 均线值间距 */
+.pane-legend-line.pane-legend-wrap.study {
+    margin-bottom: 2px;
+}
+
+
+/* 左侧工具栏样式 */
+.toggleButton-3TAD9tll- .background-1bSnR2Ey-,.container-3_8ayT2Q- .background-Q1Fcmxly- {
+    fill: #b18c2d;
+    stroke: none;
+}
+.container-3_8ayT2Q- .arrow-WcYWFXUn- {
+    stroke: white;
+}
+.container-3_8ayT2Q-:hover .background-Q1Fcmxly- {
+    fill: #836415;
+    stroke: none;
+}
+
+.control-1TyEfSIx-:hover .arrow-1cFKS5Ok-:hover {
+    background-color: #b18c2d;
+}
+
+.control-1TyEfSIx-:hover .arrow-1cFKS5Ok-:hover svg {
+    stroke: white;
+}
+
+.button-263WXsg--.isTransparent-sRmateFl-.isActive-2mI1-NUL-:hover .bg-1kRv1Pf2- {
+    background-color: #b18c2d;
+}.button-263WXsg--.isTransparent-sRmateFl-.isActive-2mI1-NUL-:hover .bg-1kRv1Pf2- svg {
+    color: white;
+}
+
+.isOpened-22vLOY9o- .control-1TyEfSIx- .arrow-1cFKS5Ok- {
+    background-color: #836415;
+}
+.isOpened-22vLOY9o- .control-1TyEfSIx- .arrow-1cFKS5Ok- svg {
+    stroke: white;
+}
+
+.inner-1xuW-gY4- svg {
+    color: #b0bec5;
+}
+
+.bg-1kRv1Pf2-:hover {
+    background-color: #b18c2d !important;
+}
+
+.bg-1kRv1Pf2-:hover svg {
+    color: white;
+}
+
+.button-263WXsg--.isTransparent-sRmateFl-.isActive-2mI1-NUL- .icon-1Y-3MM9F- {
+    color: #b18c2d;
+}
+
+.button-263WXsg--:hover {
+    color: white;
+}
+
+.button-263WXsg-- {
+    color: #b0bec5;
+
+}
+
+.button-263WXsg--:hover .bg-1kRv1Pf2- {
+    background-color: transparent;
+}
+
+.inner-1xuW-gY4- {
+    background-color: #999;
+}
+
+
+/* 初始化 */
+
+.chart-page {
+    background: #131313 !important;
+}.chart-page .js-rootresizer__contents {
+    background: #131313 !important;
+}
+.container-2BvS3Fpg-.border-right-OzIcepiV- {
+    background: #131313 !important;
+}
+.container-2BvS3Fpg-.bottom-left-radius-xCxQ998i- .inner-3YzQuyJx- {
+    background: #131313 !important;
+}
+html {
+    background: #131313 !important;
+}
+
+.layout__area--top {
+    background: #131313 !important;
+}
+
+.toolbar-2n2cwgp5- {
+    background: #131313 !important;
+}
