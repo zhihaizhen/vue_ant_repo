@@ -112,3 +112,16 @@ export function getGeoJson(adcode, childAdcode = '') {
 export function formatJson(arr, filterVal) {
   return arr.map(v => filterVal.map(j => v[j].toString()));
 }
+
+export function getYearMonthDay(date) {
+
+  let year = date.getFullYear();
+  let month = date.getMonth();
+  let day = date.getDate();
+  return {year, month, day};
+}
+
+export function getDate(year, month, day) {
+
+  return new Date(year, month, day);
+}

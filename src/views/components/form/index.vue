@@ -37,6 +37,10 @@
             </a-radio>
           </a-radio-group>
         </a-form-model-item>
+
+        <a-form-model-item prop="reviewer" label="自定义日期组件">
+          <date-picker v-model="customDate"></date-picker>
+        </a-form-model-item>
         <a-form-model-item :wrapper-col="{ span: 24 }" class="text-center">
           <a-button type="primary" @click="addFormData">
             添加
@@ -54,10 +58,15 @@
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
+
+import DatePicker from "@/components/datePicker";
+
 export default {
   name: 'formPgae',
   data() {
     return {
+
+      customDate: new Date(),
       formRule: {
         name: [{ required: true, trigger: 'blur', message: '商品名称不能为空！' }],
         type: [{ required: true, trigger: 'blur', message: '商品类型不能为空!' }],
@@ -105,6 +114,9 @@ export default {
         reviewer: 'Siri'
       }
     };
+  },
+  components: {
+    DatePicker
   },
   mounted() {},
   methods: {
