@@ -1,18 +1,19 @@
 <template>
 
+    <!--基于原生js封装的日历组件-->
     <div v-click-outside>
 
-        <input type="text" :value="formatDate" @focus="handleFocus" @blur="handleBlur">
+        <input class="text-input" type="text" :value="formatDate">
         <div class="panel" v-if="isVisible">
 
             <div class="pannel-nav">
 
-                <span>&lt;</span>
-                <span>&lt;&lt;</span>
-                <span>xxx年</span>
-                <span>xxx月</span>
-                <span>&gt;&gt;</span>
-                <span>&gt;</span>
+                <span @click="preYear">&lt;</span>
+                <span @click="preMonth">&lt;&lt;</span>
+                <span>{{currentTime.year}}年</span>
+                <span>{{currentTime.month + 1}}月</span>
+                <span @click="nextMonth">&gt;&gt;</span>
+                <span @click="nextYear">&gt;</span>
             </div>
 
             <div class="pannel-content">
@@ -27,8 +28,9 @@
 
                         <span class="cell cell-day" v-for="j in 7" :key="j"
                             @click="handleChoose(visibeDays[(i-1) * 7 + (j-1)])"
-                            :class="[ {notCurrentMonth: !isCurrentMonth(visibeDays[(i-1) * 7 + (j-1)])},
-                                      {currentDay: isCurrentDay(visibeDays[(i-1) * 7 + (j-1)])}  ]"
+                            :class="[ { notCurrentMonth: !isCurrentMonth(visibeDays[(i-1) * 7 + (j-1)]) },
+                                      { currentDay: isCurrentDay(visibeDays[(i-1) * 7 + (j-1)]) },
+                                      { currentSelect: isSelectDay(visibeDays[(i-1) * 7 + (j-1)]) }   ]"
                             >
 
                             {{ visibeDays[(i-1) * 7 + (j-1)].getDate() }}
@@ -66,14 +68,14 @@
                             
                             // 判断一下是否当前面板已经显示出来
                             if(!vnode.context.isVisible) {
-                                vnode.context.focus();
+                                vnode.context.handleFocus();
                             }
                           
                         }
                         else {
 
                             if(vnode.context.isVisible) {
-                                vnode.context.blur();
+                                vnode.context.handleBlur();
                             }
                             
                         }
@@ -92,9 +94,11 @@
 
         data() {
 
+            let {year, month} = getYearMonthDay(this.value);
             return{
 
                 weekDays: ['日', '一', '二', '三', '四', '五', '六'],
+                currentTime: {year, month},
                 isVisible: false
             }
         },
@@ -112,7 +116,7 @@
 
             visibeDays() {
 
-                let {year, month} = getYearMonthDay(this.value);
+                let {year, month} = getYearMonthDay(getDate(this.currentTime.year, this.currentTime.month, 1));
                 let currentFirstDay = getDate(year, month, 1);
                 let week = currentFirstDay.getDay();
                 let startDay = currentFirstDay - week * 60 * 60 * 1000 * 24;
@@ -133,44 +137,77 @@
         methods: {
 
             handleChoose(day) {
-
+                
+                this.currentTime = getYearMonthDay(day);
                 this.$emit('input', day);
                 this.handleBlur();
             },
 
             isCurrentMonth(date) {
 
-                let {year, month} = getYearMonthDay(this.value);
+                let {year, month} = getYearMonthDay(getDate(this.currentTime.year, this.currentTime.month, 1));
                 let {year: y, month: m} = getYearMonthDay(date);
                 return year === y && month === m;
             },
 
             isCurrentDay(date) {
 
-                let {year, month, day} = getYearMonthDay(this.value);
+                let {year, month, day} = getYearMonthDay(new Date());
                 let {year: y, month: m, day: d} = getYearMonthDay(date);
                 return year === y && month === m && day === d;
             },
 
+            isSelectDay(date) {
+
+                let {year, month, day} = getYearMonthDay(this.value);
+                let {year: y, month: m, day: d} = getYearMonthDay(date);
+                return year === y && month === m && day === d;
+            },
             handleFocus() {
               this.isVisible = true;
             },
 
             handleBlur() {
               this.isVisible = false;
+            },
+
+            preYear() {
+                this.currentTime.year--;
+            },
+
+            preMonth() {
+
+                let d = getDate(this.currentTime.year, this.currentTime.month, 1);
+                d.setMonth(d.getMonth() - 1);
+                this.currentTime = getYearMonthDay(d);
+            },
+
+            nextMonth() {
+                this.currentTime.month++;
+            },
+
+            nextYear() {
+                this.currentTime.year++;
             }
+
           
         }
     };
 </script>
 
 <style lang="scss">
+
+    .text-input{
+        width: 100%;
+    }
     
     .panel {
-        width: 32*7px;
+
         position: absolute;
+        width: 32*7px;
         background: #fff;
         box-shadow: 2px 2px 2px pink, -2px -2px 2px pink;
+        z-index: 9999;
 
         .pannel-nav{
             height: 30px;
@@ -196,7 +233,7 @@
                 box-sizing: border-box;
             }
 
-            .cell-day:hover {
+            .cell-day:hover, .currentSelect {
                 border: 1px solid pink;
             }
             

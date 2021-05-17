@@ -5,6 +5,9 @@
         <a-form-model-item prop="name" label="商品名称" hasFeedback>
           <a-input v-model="form.name" />
         </a-form-model-item>
+        <a-form-model-item prop="reviewer" label="自定义日期组件">
+          <date-picker v-model="customDate"></date-picker>
+        </a-form-model-item>
         <a-form-model-item prop="type" label="商品类型" hasFeedback>
           <a-select placeholder="请输入商品类型" allowClear @change="changeType">
             <a-select-option v-for="item in typeOption" :key="item.key" :value="item.key">
@@ -38,9 +41,6 @@
           </a-radio-group>
         </a-form-model-item>
 
-        <a-form-model-item prop="reviewer" label="自定义日期组件">
-          <date-picker v-model="customDate"></date-picker>
-        </a-form-model-item>
         <a-form-model-item :wrapper-col="{ span: 24 }" class="text-center">
           <a-button type="primary" @click="addFormData">
             添加
