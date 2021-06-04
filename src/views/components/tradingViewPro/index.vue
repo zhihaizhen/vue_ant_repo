@@ -1,5 +1,5 @@
 <template>
-    <div id="tv_chart_pro" class="chart-area-main bg-white" style="width: 100%; height: 500px"></div>
+    <div id="tv_chart_pro" class="chart-area-main bg-white" style="width: 100%; height: 1000px"></div>
 </template>
 <script>
 

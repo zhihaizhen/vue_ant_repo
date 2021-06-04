@@ -1,108 +1,50 @@
 <template>
   <div class="table-wrapper">
     <a-card :hoverable="true" :bordered="false">
-      <div slot="title" class="flex flex-wrap">
-
-        <a-button type="danger" icon="delete" style="margin:0 16px 10px" :loading="deleteLoading" @click="batchDeleteTable">
-          批量删除
-        </a-button>
-
-        <div class="filter-wrapper">
-          <span class="label">付款人：</span>
-          <a-input placeholder="付款人" class="select-width" v-model="filterList.name" />
+      <smart-table
+        :tableData="tableData"
+        :columns="tableHead"
+        :loading="loading"
+        :pagination="{
+          pageSize: filterList.size,
+          current: filterList.page,
+          total: filterList.total,
+          showTotal: total => `${filterList.total} 条`
+        }"
+        :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: handleSelect }"
+        @changeCurrent="handleChangeCurrent"
+      >
+        <div slot="index" slot-scope="{ index }">
+          {{ index + 1 }}
         </div>
-
-        <div class="filter-wrapper" style="margin:0 15px">
-          <span class="label">订单状态：</span>
-          <a-select placeholder="订单状态" class="select-width" allowClear @change="changeStatus">
-            <a-select-option v-for="item in typeOption" :key="item.key" :value="item.key">
-              {{ item.label }}
-            </a-select-option>
-          </a-select>
-        </div>
-
-        <a-button type="primary" icon="search" class="select-bottom" style="margin-right:16px" @click="search">
-          查询
-        </a-button>
-        <a-button type="primary" icon="export" class="select-bottom" :loading="exportLoading" @click="handleExport">
-          导出
-        </a-button>
-      </div>
-        
-        <standard-table
-          :tableData="tableData"
-          :tableHead="tableHead"
-          :loading="loading"
-          :pagination="{
-            pageSize: filterList.size,
-            current: filterList.page,
-            total: filterList.total,
-            showTotal: total => `${filterList.total} 条`
-          }"
-          :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: handleSelect }"
-          @changeCurrent="handleChangeCurrent"
-        >
-          <div slot="index" slot-scope="{ index }">
-            {{ index + 1 }}
-          </div>
-          <div slot="money" slot-scope="{ text }">¥ {{ text }}</div>
-          <div slot="action" slot-scope="{ text }">
-            <a-button type="primary" size="small" @click="handleEdit(text)">
-              编辑
+        <div slot="money" slot-scope="{ text }">¥ {{ text }}</div>
+        <div slot="action" slot-scope="{ text }">
+          <a-button type="primary" size="small" @click="handleEdit(text)">
+            编辑
+          </a-button>
+          <a-popconfirm title="你确定要删除当前列吗?" ok-text="是" cancel-text="否" @confirm="handleDelete(text)">
+            <a-button type="danger" size="small" style="margin-left:8px">
+              删除
             </a-button>
-            <a-popconfirm title="你确定要删除当前列吗?" ok-text="是" cancel-text="否" @confirm="handleDelete(text)">
-              <a-button type="danger" size="small" style="margin-left:8px">
-                删除
-              </a-button>
-            </a-popconfirm>
-          </div>
-        </standard-table>
+          </a-popconfirm>
+        </div>
+      </smart-table>
     </a-card>
-
-    <a-modal
-      title="编辑"
-      :visible="editShow"
-      okText="确认"
-      cancelText="取消"
-      :width="620"
-      @ok="handleOk"
-      @cancel="editShow = false"
-    >
-      <a-form-model :label-col="{ span: 4 }" :wrapper-col="{ span: 16 }" hideRequiredMark>
-        <a-form-model-item prop="id" label="id">
-          <a-input v-model="currentEdit.id" disabled />
-        </a-form-model-item>
-        <a-form-model-item prop="name" label="付款人">
-          <a-input v-model="currentEdit.name" disabled />
-        </a-form-model-item>
-        <a-form-model-item prop="status" label="订单状态">
-          <a-input v-model="currentEdit.status" disabled />
-        </a-form-model-item>
-        <a-form-model-item prop="date" label="下单时间">
-          <a-input v-model="currentEdit.date" disabled />
-        </a-form-model-item>
-        <a-form-model-item prop="money" label="付款金额">
-          <a-input v-model="currentEdit.money" disabled />
-        </a-form-model-item>
-        <a-form-model-item prop="text" label="备注">
-          <a-input v-model="currentEdit.text" />
-        </a-form-model-item>
-      </a-form-model>
-    </a-modal>
   </div>
 </template>
 
 <script>
-import standardTable from '@/components/standardTable/index';
+
+import smartTable from '@/components/smartTable/index';
 import { getTableData, deleteTable, batchDeleteTable, editTable } from '@/api/table';
 import { formatJson } from '@/utils';
 export default {
-  name: 'tables',
-  components: { standardTable },
+
+  name: 'smartTables',
+  components: { smartTable },
 
   data() {
     return {
-
       typeOption: [
         {
           key: '待付款',
@@ -125,7 +67,6 @@ export default {
           label: '已评价'
         }
       ],
-
       tableHead: [
         {
           label: '序号',
@@ -164,12 +105,12 @@ export default {
         },
         {
           label: '操作',
+          prop: 'id',
           scopedSlots: { customRender: 'action' },
           width: 140
         }
       ],
       tableData: [],
-
       loading: false,
       selectedRowKeys: [],
       selectValue: [],
@@ -196,13 +137,14 @@ export default {
     },
 
     getTableData() {
-      
       this.loading = true;
       const { name, status, page, size } = this.filterList;
       getTableData({ page, size, name, status }).then(res => {
         const data = res.data || {};
         this.filterList.total = data.total || 0;
         this.tableData = data.list || [];
+
+        console.log("tableData------", this.tableData);
         this.loading = false;
       });
     },
@@ -266,9 +208,9 @@ export default {
         const header = [],
           filterVal = [];
         this.tableHead.forEach(item => {
-          if (item.label != '操作' && item.label != '序号') {
+          if (item.title != '操作' && item.title != '序号') {
             header.push(item.title);
-            filterVal.push(item.prop);
+            filterVal.push(item.dataIndex);
           }
         });
         const data = formatJson(this.tableData, filterVal);
@@ -284,12 +226,16 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
+
 .table-wrapper {
   width: 100%;
   height: 100%;
   position: relative;
+
   .filter-wrapper {
+
     width: 230px;
     .label {
       min-width: 80px;

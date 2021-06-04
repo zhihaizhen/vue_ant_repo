@@ -41,6 +41,12 @@ const componentsRouter = {
       meta: { title: 'Table表', role: ['admin', 'test'] }
     },
     {
+      name: 'smartTable',
+      path: '/components/smartTable',
+      component: () => import('@/views/components/smartTable/index'),
+      meta: { title: 'SmartTable表', role: ['admin', 'test'] }
+    },
+    {
       name: 'form',
       path: '/components/form',
       component: () => import('@/views/components/form/index'),
@@ -87,6 +93,12 @@ const componentsRouter = {
       path: '/components/tradingViewPro',
       component: () => import('@/views/components/tradingViewPro/index'),
       meta: { title: 'K线图Pro', role: ['admin', 'test'] }
+    },
+    {
+      name: 'leeCode算法',
+      path: '/components/algorithm',
+      component: () => import('@/views/components/algorithm/index'),
+      meta: { title: 'leeCode算法', role: ['admin', 'test'] }
     }
   ]
 };
