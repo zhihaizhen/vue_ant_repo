@@ -1,3 +1,4 @@
+import { Result } from 'ant-design-vue';
 import remoteLoad from './remoteLoad';
 const { AMapCDN, AMapUiCDN } = require('@/plugins/cdn');
 
@@ -124,4 +125,101 @@ export function getYearMonthDay(date) {
 export function getDate(year, month, day) {
 
   return new Date(year, month, day);
+}
+
+
+
+/**
+ * 加强版节流
+ * @param {Function} func 
+ * @param {Number} wait 
+ */
+export function throttlePro(func, wait) {
+
+  if(typeof func != 'function') throw new TypeError('func must be a function!');
+  wait = +wait;
+  if (isNaN(wait)) wait = 300;
+  let timer = null,
+      previous = 0;
+      result;
+
+  return function proxy(...params) {
+
+    let now = +new Date,
+    remaining = wait - (now - previous),
+    self = this;
+
+    if (remaining <= 0) {
+
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+
+      previous = now;
+      result = func.apply(self, params);
+      return result;
+    }
+
+    if (!timer) {
+
+      timer = setTimeout(() => {
+
+        clearTimeout(timer);
+        timer = null;
+        previous = +new Date;
+        result = func.apply(self, params);
+      }, remaining);
+    };
+
+    return result;
+  };
+}
+
+
+/**
+ * 加强版防抖
+ * @param {Function} func 
+ * @param {Number} wait 
+ * @param {Boolean} immediate 
+ */
+export function debouncePro(func, wait, immediate) {
+
+    if (typeof func != 'function') throw new TypeError('func must be a function');
+    if (typeof wait === 'undefined') {
+      wait = 500;
+      immediate = false;
+    }
+
+    if (typeof wait === 'boolean') {
+
+      immediate = wait;
+      wait = 500;
+    }
+
+    if (typeof immediate === 'undefined') {
+      immediate = false;
+    }
+
+    if (typeof wait !== 'number') throw new TypeError('wait must be a number!');
+    if (typeof immediate !== 'boolean') throw new TypeError('immediate must be a Boolean!');
+
+    let timer = null, result;
+
+    return function proxy(...params) {
+
+      let self = this,
+      callNow = !timer && immediate;
+      if (timer) clearTimeout(timer); 
+      timer = setTimeout(() => {
+
+        clearTimeout(timer);
+        timer = null;
+        if (!immediate) result = func.apply(self, params);
+      }, wait);
+
+      if (callNow) result = func.apply(self, params);
+      return result;
+
+    }
 }

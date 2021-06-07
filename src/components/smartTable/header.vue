@@ -1,43 +1,19 @@
 <template>
   <div class="smart-table-header">
 
-    <table class="table-center" border="0" cellspacing="0" cellpadding="0" style="width: 100%;">
-      <colgroup>
-        <col width="127.46666666666667">
-        <col width="266.2">
-        <col width="266.2">
-        <col width="157.46666666666667">
-        <col width="266.2">
-        <col width="137.46666666666667">
-      </colgroup>
-      <thead>
 
-        <tr :style="{height: setting.headerHeight+ 'px'}">
-          <template v-for="(item, i) in columns">
-            <th v-if="item.sorter" class="header-cell sortable-column" :key="i">
-
-              <span class="header-text">{{ item.title }}</span>
-
-              <span class="sorting">
-                <i class="top layui-edge layui-table-sort-asc"></i>
-                <i class="bottom layui-edge layui-table-sort-desc"></i>
-              </span>
-            </th>
-
-            <th v-else class="header-cell" :key="i">
-              <span class="header-text">{{ item.title }}</span>
-            </th>
-          </template>
-      </tr>
-      </thead>
-    </table>
-    
+    <header-column :columns='$headerLeftColumns' :setting='setting'> </header-column>
+    <header-column :columns='$headerCenterColumns' :setting='setting'> </header-column>
+    <header-column :columns='$headerRightColumns' :setting='setting'> </header-column>
     
   </div>
 </template>
 
 <script>
+
 import utils from './js/utils';
+import HeaderColumn from './headerColumn.vue';
+
 export default {
 
   name: 'smartTableHeader',
@@ -47,25 +23,36 @@ export default {
 
   inject: ['columns', 'setting'],
 
+  components: { HeaderColumn },
+
   data() {
-    return {
+    return {};
+  },
 
-      $headerLeftColumns: [],
-      $headerCenterColumns: [],
-      $headerRightColumns: [],
+  computed: {
 
-    };
+    $headerLeftColumns() {
+      return this.columns.leftColumns;
+    },
+
+    $headerCenterColumns() {
+      return this.columns.centerColumns;
+    },
+
+    $headerRightColumns() {
+      return this.columns.rightColumns;
+    },
   },
 
   created() {
-    console.log("table-header------init-------", this.columns, this.setting);
     this.initHeader();
   },
 
   methods: {
 
     initHeader() {
-      // 
+      console.log("table-header------columns-------", this.$headerCenterColumns);
+      console.log("table-header------setting-------", this.setting);
     }
   }
 };

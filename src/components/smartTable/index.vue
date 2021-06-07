@@ -1,69 +1,9 @@
 <template>
   <div class="smart-table-container">
 
-    <t-header></t-header>
+    <table-header></table-header>
+    <table-body></table-body>
 
-    <div class="smart-table-body" style="max-height: 431px;">
-
-      <div class="smart-table-body-inner">
-        <table class="table-center" border="0" cellspacing="0" cellpadding="0" style="width: 100%;">
-          <colgroup>
-            <col width="594.9230769230769">
-              <col width="594.9230769230769">
-                <col width="376.61538461538464">
-                  <col width="594.9230769230769">
-                    <col width="356.61538461538464">
-          </colgroup>
-          <tbody>
-            <tr id="smart-table-tk-2616997776-0011942336-0" style="height: 24px;" class="">
-              <td class="s-ellipsis">0</td>
-              <td class="s-ellipsis">---</td>
-              <td class="s-ellipsis">NaN</td>
-              <td class="s-ellipsis">
-                <div class="layui-progress layui-progress-big">
-                  <div class="layui-progress-bar" style="width: 0%;">
-                    <span class="layui-progress-text">0%</span>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <button class="layui-btn cell-ele-tk-2616997798-7735917714-1">接收</button>
-              </td>
-            </tr>
-            <tr id="smart-table-tk-2616997776-0011942336-1" style="height: 24px;" class="">
-              <td class="s-ellipsis">1</td>
-              <td class="s-ellipsis">---</td>
-              <td class="s-ellipsis">NaN</td>
-              <td class="s-ellipsis">
-                <div class="layui-progress layui-progress-big">
-                  <div class="layui-progress-bar" style="width: 0%;">
-                    <span class="layui-progress-text">0%</span>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <button class="layui-btn cell-ele-tk-2616997798-5519894839-1">接收</button>
-              </td>
-            </tr>
-            <tr id="smart-table-tk-2616997776-0011942336-2" style="height: 24px;" class="">
-              <td class="s-ellipsis">2</td>
-              <td class="s-ellipsis">---</td>
-              <td class="s-ellipsis">NaN</td>
-              <td class="s-ellipsis">
-                <div class="layui-progress layui-progress-big">
-                  <div class="layui-progress-bar" style="width: 0%;">
-                    <span class="layui-progress-text">0%</span>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <button class="layui-btn cell-ele-tk-2616997798-2849972118-1">接收</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
 </div>
 </template>
 
@@ -105,13 +45,13 @@ const config = {
     },
 };
 
-
-import tHeader from "./header";
+import TableHeader from "./header";
+import TableBody from "./body";
 import TableColumn from "./js/TableColumn";
 import utils from "./js/utils";
 export default {
-  name: 'smartTable',
 
+  name: 'SmartTable',
   props: {
 
     columns: {
@@ -124,7 +64,24 @@ export default {
       default: () => {
         return config.defaults;
       }
+    },
+
+    rowKey: {
+      type: String|Function,
+      default: () => {
+        return '';
+      }
+    },
+
+    tableData: {
+      type: Array,
+      default: () => {
+        return [];
+      }
+
     }
+
+
   },
 
   computed: {
@@ -143,7 +100,7 @@ export default {
     }
   },
 
-  components: { tHeader },
+  components: { TableHeader, TableBody },
 
   provide() {
 
@@ -439,4 +396,191 @@ export default {
 
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss">
+
+  .smart-table-container {
+
+     position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    border-top: 1px solid #e6e6e6;
+    border-left: 1px solid #e6e6e6;
+    overflow: auto;
+
+    .table-fixed-left {
+
+        position: absolute;
+        left: 0;
+        z-index: 1;
+
+        &.scroll-moving {
+            box-shadow: #191919 -2px 0 15px -5px;
+        }
+    }
+    
+    .table-center {
+        width: 100%;
+    }
+
+    .table-fixed-right {
+
+        position: absolute;
+        right: 0;
+        z-index: 2;
+
+        &.scroll-moving {
+            box-shadow: #191919 5px 0 15px -2px;
+        }
+    }
+
+    table {
+
+        table-layout: fixed;
+        width: unset;
+        border-collapse: collapse;
+
+        th,
+        td {
+            box-sizing: border-box;
+            padding-left: 5px;
+            padding-right: 15px;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 1px solid #e6e6e6;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        th {
+            text-align: left;
+
+            &.sortable-column {
+
+                cursor: pointer;
+                user-select: none;
+            }
+        }
+
+        th:first-child,
+        td:first-child {
+            padding-left: 10px;
+        }
+        
+        th.column-check input,
+        td.column-check input {
+
+            width: 14px;
+            height: 14px;
+            margin: 0;
+            position: relative;
+            top: 3px;
+        }
+    }
+
+    .cell-tooltip {
+
+        position: fixed;
+        z-index: 999;
+        display: block;
+        padding: 5px;
+        background-color: white;
+        border: 2px solid black;
+        border-radius: 5px;
+
+        * {
+            color: black;
+        }
+    }
+    
+    .config-panel {
+
+        position: fixed;
+        right: 5px;
+        top: 40px;
+        z-index: 99;
+        border: 2px solid white;
+        border-radius: 5px;
+        background-color: #423838;
+        overflow: hidden;
+
+        .btn {
+
+            display: block;
+            float: right;
+            margin-left: 5px;
+            margin-top: 3px;
+            border: 1px solid #0e1218;
+            background-image: linear-gradient(-180deg, #3e8aff 0%, #135fd5 100%);
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .content-container {
+
+            max-height: 300px;
+            overflow: auto;
+            box-sizing: border-box;
+            padding: 10px 5px;
+
+            .btn {
+
+                margin-top: -3px;
+                padding: 2px 5px 3px 5px;
+                line-height: 16px;
+            }
+        }
+
+        .panel-boolbar {
+
+            background-color: black;
+            height: 30px;
+            line-height: 30px;
+            padding-right: 10px;
+
+            .tab-item {
+
+                display: inline-block;
+                height: 100%;
+                padding-left: 10px;
+                padding-right: 10px;
+                background-color: #8c95a2;
+                cursor: pointer;
+
+                &.focused {
+                    background-color: #423838;
+                }
+            }
+
+            .btn {
+        
+                padding: 3px 6px 5px 6px;
+                line-height: 16px;
+            }
+        }
+
+        .column-list-panel {
+            width: 240px;
+        }
+
+        .checkbox-item {
+
+            display: block;
+            overflow: hidden;
+
+            > input {
+
+                width: 16px;
+                height: 16px;
+            }
+
+            > span {
+
+                padding-left: 5px;
+                position: relative;
+                top: -3px;
+                font-size: 14px;
+            }
+        }
+    }
+
+  }
+</style>

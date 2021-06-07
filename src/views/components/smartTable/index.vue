@@ -5,12 +5,7 @@
         :tableData="tableData"
         :columns="tableHead"
         :loading="loading"
-        :pagination="{
-          pageSize: filterList.size,
-          current: filterList.page,
-          total: filterList.total,
-          showTotal: total => `${filterList.total} 条`
-        }"
+        rowKey="id"
         :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: handleSelect }"
         @changeCurrent="handleChangeCurrent"
       >
@@ -77,8 +72,7 @@ export default {
         {
           label: '用户id',
           prop: 'id',
-          sorter: true,
-          ellipsis: true
+          sortable: true,
         },
         {
           label: '付款人',
@@ -91,7 +85,7 @@ export default {
         {
           label: '下单时间',
           prop: 'date',
-          ellipsis: true
+          sortable: true,
         },
         {
           label: '付款金额',
@@ -100,14 +94,14 @@ export default {
         },
         {
           label: '备注',
-          prop: 'text',
-          ellipsis: true
+          prop: 'text'
         },
         {
           label: '操作',
           prop: 'id',
           scopedSlots: { customRender: 'action' },
-          width: 140
+          width: 140,
+          align: 'right'
         }
       ],
       tableData: [],
